@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Spinner from '../Spinner/Spinner';
 
 const Loading = ({ isLoading }) => {
@@ -8,6 +9,10 @@ const Loading = ({ isLoading }) => {
             <Spinner />
         </div>
     ) : null;
+};
+
+Loading.propTypes = {
+    isLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

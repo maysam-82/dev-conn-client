@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Spinner = ({ text }) => {
     return (
@@ -12,6 +13,10 @@ const Spinner = ({ text }) => {
             {text ? <p>{text}</p> : null}
         </div>
     );
+};
+
+Spinner.propTypes = {
+    text: PropTypes.string,
 };
 
 export default Spinner;
