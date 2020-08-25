@@ -3,5 +3,6 @@ export const errorMessage = {
 };
 
 export const successMessage = {
-    WELCOME_TO_DEV_CONN: 'Welcome to developers social network',
+    REGISTRATION_SUCCEEDED: 'Registration succeeded.',
+    WELCOME: 'Welcome.',
 };
