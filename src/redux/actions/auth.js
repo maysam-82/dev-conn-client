@@ -1,9 +1,27 @@
 import actionTypes from './actionTypes';
-import { postData } from '../../services/api/fetchApi';
+import { postData, setAuthToken, getData } from '../../services/api/fetchApi';
 import { setToast } from './toast';
 import { successMessage } from '../../fixtures/messages';
 import { setLoading, removeLoading } from './loading';
 import history from '../../history';
+
+// Load user
+export const loadUser = () => async (dispatch) => {
+    const token = localStorage.token;
+    if (token) {
+        setAuthToken(token);
+    }
+    try {
+        const data = await getData('/api/auth');
+        dispatch({
+            type: actionTypes.USER_LOADED,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({ type: actionTypes.AUTH_ERROR });
+        history.push('/login');
+    }
+};
 
 // Register user
 export const setRegister = ({ name, email, password }) => async (dispatch) => {

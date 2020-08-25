@@ -13,6 +13,7 @@ const authenticationReducer = (state = initialState, action) => {
         case actionTypes.REGISTER_START:
             return { ...state, isLoading: true };
         case actionTypes.REGISTER_FAIL:
+        case actionTypes.AUTH_ERROR:
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -27,6 +28,13 @@ const authenticationReducer = (state = initialState, action) => {
                 ...payload,
                 isLoading: false,
                 isAuthenticated: true,
+            };
+        case actionTypes.USER_LOADED:
+            return {
+                ...state,
+                isAuthenticated: true,
+                loading: false,
+                user: payload,
             };
 
         default:

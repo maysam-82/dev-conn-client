@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {};
 
-const appStore = createStore(
+export const appStore = createStore(
     reducers,
     initialState,
     composeEnhancers(applyMiddleware(thunk))
