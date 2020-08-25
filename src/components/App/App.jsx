@@ -4,8 +4,9 @@ import Navbar from '../Navbar';
 import Landing from '../Landing';
 import Login from '../Login';
 import Register from '../Register';
+import Toast from '../Toast';
+import Loading from '../Loading';
 import { routes } from '../../routes';
-import Toast from '../Toast/Toast';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
             <Navbar />
             <Route exact path={routes.HOME} component={Landing} />
             <section className="container">
+                <Loading />
                 <Toast />
                 <Switch>
                     <Route exact path={routes.REGISTER} component={Register} />
