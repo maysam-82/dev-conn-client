@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Navbar } from '../Navbar';
+import { Landing } from '../Landing';
 
 const App = () => {
-    return <div>App</div>;
+    return (
+        <Fragment>
+            <Navbar />
+            <Landing />
+        </Fragment>
+    );
 };
 
 export default App;

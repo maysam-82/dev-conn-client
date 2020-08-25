@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-    --primary-color: #17a2b8;
+    --primary-color: #b50000;
     --dark-color: #343a40;
     --light-color: #f4f4f4;
     --danger-color: #dc3545;
@@ -309,6 +309,7 @@ button {
     width: 100%;
     top: 0;
     border-bottom: solid 1px var(--primary-color);
+    /* background-color: var(--primary-color); */
     opacity: 0.9;
 }
 
