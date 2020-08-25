@@ -1,24 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { routes } from '../../routes';
 
-export const Navbar = () => {
+const Navbar = () => {
     return (
         <nav className="navbar bg-dark">
             <h1>
-                <a href="index.html">
+                <Link to={routes.HOME}>
                     <i className="fas fa-code"></i> Devs Social Network
-                </a>
+                </Link>
             </h1>
             <ul>
                 <li>
-                    <a href="profiles.html">Developers</a>
+                    <Link to={routes.PROFILE}>Developers</Link>
                 </li>
                 <li>
-                    <a href="register.html">Register</a>
+                    <Link to={routes.REGISTER}>Register</Link>
                 </li>
                 <li>
-                    <a href="login.html">Login</a>
+                    <Link to={routes.LOGIN}>Login</Link>
                 </li>
             </ul>
         </nav>
     );
 };
+
+export default Navbar;

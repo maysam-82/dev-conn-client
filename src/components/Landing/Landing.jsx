@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { routes } from '../../routes';
 
-export const Landing = () => {
+const Landing = () => {
     return (
         <section className="landing">
             <div className="dark-overlay">
@@ -11,15 +13,17 @@ export const Landing = () => {
                         get help from other developers
                     </p>
                     <div className="buttons">
-                        <a href="register.html" className="btn btn-primary">
+                        <Link to={routes.REGISTER} className="btn btn-primary">
                             Sign Up
-                        </a>
-                        <a href="login.html" className="btn btn-light">
+                        </Link>
+                        <Link to={routes.LOGIN} className="btn btn-light">
                             Login
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
         </section>
     );
 };
+
+export default Landing;
