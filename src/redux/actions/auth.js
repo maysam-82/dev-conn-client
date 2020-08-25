@@ -3,6 +3,7 @@ import { postData } from '../../services/api/fetchApi';
 import { setToast } from './toast';
 import { successMessage } from '../../fixtures/messages';
 import { setLoading, removeLoading } from './loading';
+import history from '../../history';
 
 // Register user
 export const setRegister = ({ name, email, password }) => async (dispatch) => {
@@ -19,6 +20,8 @@ export const setRegister = ({ name, email, password }) => async (dispatch) => {
         dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: data });
         dispatch(removeLoading());
         dispatch(setToast(successMessage.WELCOME_TO_DEV_CONN, 'success'));
+        // TODO: push to the relevant route
+        // history.push('/');
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
