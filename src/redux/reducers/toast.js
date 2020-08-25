@@ -1,8 +1,8 @@
 import actionTypes from '../actions/actionTypes';
 
-const INITIAL_STATE = [];
+const initialState = [];
 
-const toastReducer = (state = INITIAL_STATE, action) => {
+const toastReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
         case actionTypes.SET_TOAST:

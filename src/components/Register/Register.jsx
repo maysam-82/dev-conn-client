@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setToast } from '../../redux/actions/toast';
+import { setRegister } from '../../redux/actions/auth';
 import { routes } from '../../routes';
 import { errorMessage } from '../../fixtures/messages';
 import toasTypes from '../../fixtures/toasTypes';
 
-const Register = ({ setToast }) => {
-    const [formData, setFormData] = useState({
+const Register = ({ setToast, setRegister }) => {
+    const initialFormData = {
         name: '',
         email: '',
         password: '',
         confirmPassword: '',
-    });
+    };
+    const [formData, setFormData] = useState(initialFormData);
 
     const { name, email, password, confirmPassword } = formData;
 
@@ -21,12 +23,13 @@ const Register = ({ setToast }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
             setToast(errorMessage.PASSWORDS_DO_NOT_MATCH, toasTypes.DANGER);
         } else {
-            console.log(formData);
+            setRegister({ name, email, password });
+            setFormData({ ...formData, ...initialFormData });
         }
     };
 
@@ -42,7 +45,6 @@ const Register = ({ setToast }) => {
                         type="text"
                         name="name"
                         placeholder="Name"
-                        required
                         value={name}
                         onChange={(event) => handleChange(event)}
                     />
@@ -65,7 +67,6 @@ const Register = ({ setToast }) => {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="6"
                         value={password}
                         onChange={(event) => handleChange(event)}
                     />
@@ -75,7 +76,6 @@ const Register = ({ setToast }) => {
                         type="password"
                         placeholder="Confirm Password"
                         name="confirmPassword"
-                        minLength="6"
                         value={confirmPassword}
                         onChange={(event) => handleChange(event)}
                     />
@@ -98,6 +98,7 @@ const Register = ({ setToast }) => {
 
 Register.propTypes = {
     setToast: PropTypes.func.isRequired,
+    setRegister: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setToast })(Register);
+export default connect(null, { setToast, setRegister })(Register);
