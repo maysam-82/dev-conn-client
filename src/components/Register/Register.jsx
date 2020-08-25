@@ -1,8 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setToast } from '../../redux/actions/toast';
 import { routes } from '../../routes';
+import { errorMessage } from '../../fixtures/messages';
+import toasTypes from '../../fixtures/toasTypes';
 
-const Register = () => {
+const Register = ({ setToast }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,7 +24,7 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
-            console.log('passwords do not match');
+            setToast(errorMessage.PASSWORDS_DO_NOT_MATCH, toasTypes.DANGER);
         } else {
             console.log(formData);
         }
@@ -91,4 +96,8 @@ const Register = () => {
     );
 };
 
-export default Register;
+Register.propTypes = {
+    setToast: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setToast })(Register);
