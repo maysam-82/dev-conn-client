@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setToast } from '../../redux/actions/toast';
@@ -8,7 +8,7 @@ import { routes } from '../../routes';
 import { errorMessage } from '../../fixtures/messages';
 import toasTypes from '../../fixtures/toasTypes';
 
-const Register = ({ setToast, setRegister }) => {
+const Register = ({ setToast, setRegister, isAuthenticated }) => {
     const initialFormData = {
         name: '',
         email: '',
@@ -16,6 +16,8 @@ const Register = ({ setToast, setRegister }) => {
         confirmPassword: '',
     };
     const [formData, setFormData] = useState(initialFormData);
+
+    if (isAuthenticated) return <Redirect to={routes.DASHBOARD} />;
 
     const { name, email, password, confirmPassword } = formData;
 
@@ -99,6 +101,11 @@ const Register = ({ setToast, setRegister }) => {
 Register.propTypes = {
     setToast: PropTypes.func.isRequired,
     setRegister: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
 };
 
-export default connect(null, { setToast, setRegister })(Register);
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setToast, setRegister })(Register);

@@ -39,7 +39,6 @@ export const setRegister = ({ name, email, password }) => async (dispatch) => {
         dispatch(loadUser());
         dispatch(removeLoading());
         dispatch(setToast(successMessage.REGISTRATION_SUCCEEDED, 'success'));
-        history.push('/dashboard');
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
@@ -68,7 +67,6 @@ export const setLogin = (email, password) => async (dispatch) => {
         dispatch(loadUser());
         dispatch(removeLoading());
         dispatch(setToast(successMessage.WELCOME, 'success'));
-        history.push('/dashboard');
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
