@@ -11,4 +11,5 @@ export default {
     REMOVE_LOADING: 'REMOVE_LOADING',
     USER_LOADED: 'USER_LOADED',
     AUTH_ERROR: 'AUTH_ERROR',
+    LOG_OUT: 'LOG_OUT',
 };
