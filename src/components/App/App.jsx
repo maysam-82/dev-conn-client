@@ -6,6 +6,7 @@ import Login from '../Login';
 import Register from '../Register';
 import Toast from '../Toast';
 import Loading from '../Loading';
+import Dashboard from '../Dashboard';
 import { routes } from '../../routes';
 import { loadUser } from '../../redux/actions/auth';
 import { setAuthToken } from '../../services/api/fetchApi';
@@ -26,6 +27,11 @@ const App = () => {
                 <Loading />
                 <Toast />
                 <Switch>
+                    <Route
+                        exact
+                        path={routes.DASHBOARD}
+                        component={Dashboard}
+                    />
                     <Route exact path={routes.REGISTER} component={Register} />
                     <Route exact path={routes.LOGIN} component={Login} />
                 </Switch>
