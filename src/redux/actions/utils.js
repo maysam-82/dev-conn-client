@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 // Created random string with length of 20.
 export const getRandomId = () => {
