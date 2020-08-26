@@ -31,3 +31,10 @@ export const getCurrentProfile = () => async (dispatch) => {
         });
     }
 };
+
+// Create/Update profile
+export const createProfile = (profileData, edit = false) => async (
+    dispatch
+) => {
+    console.log(profileData);
+};

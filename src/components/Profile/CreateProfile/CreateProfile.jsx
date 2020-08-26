@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { routes } from '../../../routes';
+import { createProfile } from '../../../redux/actions/profile';
 
 const CreateProfile = ({ createProfile }) => {
     const [formData, setFormData] = useState({
