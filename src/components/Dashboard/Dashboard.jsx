@@ -36,7 +36,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired,
+    profile: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
