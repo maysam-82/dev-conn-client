@@ -7,4 +7,6 @@ export const errorMessage = {
 export const successMessage = {
     REGISTRATION_SUCCEEDED: 'Registration succeeded.',
     WELCOME: 'Welcome.',
+    PROFILE_UPDATED: 'Profile updated.',
+    PROFILE_CREATED: 'Profile created.',
 };

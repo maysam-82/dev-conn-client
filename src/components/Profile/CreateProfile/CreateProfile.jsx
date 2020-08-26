@@ -21,9 +21,16 @@ const CreateProfile = ({ createProfile }) => {
         instagram: '',
     });
     const [isSocialVisible, setIsSocialVisible] = useState(false);
+
     const handleChange = ({ target: { name, value } }) => {
         setFormData({ ...formData, [name]: value });
     };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        createProfile(formData);
+    };
+
     const {
         company,
         website,
@@ -47,7 +54,7 @@ const CreateProfile = ({ createProfile }) => {
                 make your profile stand out
             </p>
             <small>* = required field</small>
-            <form className="form">
+            <form className="form" onSubmit={(event) => handleSubmit(event)}>
                 <div className="form-group">
                     <select
                         name="status"
@@ -231,4 +238,4 @@ CreateProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
 };
 
-export default connect(createProfile)(CreateProfile);
+export default connect(null, { createProfile })(CreateProfile);
