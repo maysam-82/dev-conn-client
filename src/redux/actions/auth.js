@@ -70,7 +70,6 @@ export const setLogin = (email, password) => async (dispatch) => {
         dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: data });
         dispatch(loadUser());
         dispatch(removeLoading());
-        dispatch(setToast(successMessage.WELCOME, 'success'));
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
@@ -91,6 +90,7 @@ export const setLogin = (email, password) => async (dispatch) => {
 
 // Logout user
 export const setLogout = () => (dispatch) => {
+    dispatch({ type: actionTypes.CLEAR_PROFILE });
     dispatch({ type: actionTypes.LOG_OUT });
     history.push(routes.HOME);
 };

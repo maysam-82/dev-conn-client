@@ -4,4 +4,5 @@ export const routes = {
     REGISTER: '/register',
     PROFILE: '#',
     DASHBOARD: '/dashboard',
+    CREATE_PROFILE: '/create-profile',
 };
