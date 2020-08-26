@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import { postData, setAuthToken, getData } from '../../services/api/fetchApi';
 import { setToast } from './toast';
-import { successMessage } from '../../fixtures/messages';
+import { successMessage, errorMessage } from '../../fixtures/messages';
 import { setLoading, removeLoading } from './loading';
 import history from '../../history';
 import { routes } from '../../routes';
@@ -74,6 +74,12 @@ export const setLogin = (email, password) => async (dispatch) => {
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
         if (errors.length > 0) {
             for (const error of errors) {
                 dispatch(setToast(error.msg, 'danger'));
