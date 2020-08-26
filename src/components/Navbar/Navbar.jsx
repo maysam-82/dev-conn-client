@@ -9,11 +9,14 @@ const Navbar = ({ isAuthenticated, setLogout }) => {
     const authorizedLinks = (
         <ul>
             <li>
-                <Link to={routes.PROFILE}>Developers</Link>
+                <Link to={routes.DASHBOARD}>
+                    <i className="fas fa-user" />{' '}
+                    <span className="hide-sm">Dashboard</span>
+                </Link>
             </li>
             <li>
                 <a href="#!" onClick={() => setLogout()}>
-                    <i className="fas fa-sign-out-alt"></i>
+                    <i className="fas fa-sign-out-alt" />{' '}
                     <span className="hide-sm">Logout</span>
                 </a>
             </li>
@@ -37,7 +40,7 @@ const Navbar = ({ isAuthenticated, setLogout }) => {
     return (
         <nav className="navbar bg-dark">
             <h1>
-                <Link to={routes.HOME}>
+                <Link to={!isAuthenticated ? routes.HOME : routes.DASHBOARD}>
                     <i className="fas fa-code"></i> Devs Social Network
                 </Link>
             </h1>
