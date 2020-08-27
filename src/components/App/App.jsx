@@ -7,7 +7,7 @@ import Register from '../Register';
 import Toast from '../Toast';
 import Loading from '../Loading';
 import Dashboard from '../Dashboard';
-import CreateProfile from '../Profile/CreateProfile/CreateProfile';
+import CreateProfile from '../Profile/CreateUpdateProfile';
 import Auth from '../Auth';
 import { routes } from '../../routes';
 import { loadUser } from '../../redux/actions/auth';
@@ -40,6 +40,11 @@ const App = () => {
                         <Route
                             exact
                             path={routes.CREATE_PROFILE}
+                            component={CreateProfile}
+                        />
+                        <Route
+                            exact
+                            path={routes.EDIT_PROFILE}
                             component={CreateProfile}
                         />
                     </Auth>

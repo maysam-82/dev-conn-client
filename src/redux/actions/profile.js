@@ -79,3 +79,9 @@ export const createProfile = (profileData, edit = false) => async (
         });
     }
 };
+
+// Set status of profile in terms of edit/create
+export const setProfileStatus = (isEditing) => ({
+    type: actionTypes.SET_PROFILE_STATUS,
+    payload: isEditing,
+});

@@ -5,6 +5,7 @@ const initialState = {
     profiles: [],
     repos: [],
     loading: false,
+    isEditing: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...initialState,
+            };
+        case actionTypes.SET_PROFILE_STATUS:
+            return {
+                ...state,
+                isEditing: payload,
             };
         default:
             return state;

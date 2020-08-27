@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../redux/actions/profile';
 import { routes } from '../../routes';
+import DashboardActions from '../DashboardActions/DashboardActions';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
     useEffect(() => {
@@ -17,7 +18,9 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
                 <i className="fas fa-user" /> Welcome {user && user.name}
             </p>
             {profile ? (
-                <div>Profile</div>
+                <Fragment>
+                    <DashboardActions />
+                </Fragment>
             ) : (
                 <Fragment>
                     <p>You have not yet setup profile</p>

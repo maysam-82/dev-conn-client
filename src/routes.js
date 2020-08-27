@@ -5,4 +5,5 @@ export const routes = {
     PROFILE: '#',
     DASHBOARD: '/dashboard',
     CREATE_PROFILE: '/create-profile',
+    EDIT_PROFILE: '/edit-profile',
 };
