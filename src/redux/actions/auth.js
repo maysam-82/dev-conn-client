@@ -20,10 +20,11 @@ export const loadUser = () => async (dispatch) => {
             payload: data,
         });
         dispatch(removeLoading());
+        history.push(routes.DASHBOARD);
     } catch (error) {
         dispatch(removeLoading());
         dispatch({ type: actionTypes.AUTH_ERROR });
-        history.push('/login');
+        history.push(routes.HOME);
     }
 };
 
