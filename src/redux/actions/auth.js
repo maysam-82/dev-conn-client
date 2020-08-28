@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import { postData, setAuthToken, getData } from '../../services/api/fetchApi';
 import { setToast } from './toast';
-import { successMessage } from '../../fixtures/messages';
+import { successMessage, errorMessage } from '../../fixtures/messages';
 import { setLoading, removeLoading } from './loading';
 import history from '../../history';
 import { routes } from '../../routes';
@@ -20,10 +20,11 @@ export const loadUser = () => async (dispatch) => {
             payload: data,
         });
         dispatch(removeLoading());
+        history.push(routes.DASHBOARD);
     } catch (error) {
         dispatch(removeLoading());
         dispatch({ type: actionTypes.AUTH_ERROR });
-        history.push('/login');
+        history.push(routes.HOME);
     }
 };
 
@@ -70,10 +71,15 @@ export const setLogin = (email, password) => async (dispatch) => {
         dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: data });
         dispatch(loadUser());
         dispatch(removeLoading());
-        dispatch(setToast(successMessage.WELCOME, 'success'));
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
         if (errors.length > 0) {
             for (const error of errors) {
                 dispatch(setToast(error.msg, 'danger'));
@@ -85,6 +91,7 @@ export const setLogin = (email, password) => async (dispatch) => {
 
 // Logout user
 export const setLogout = () => (dispatch) => {
+    dispatch({ type: actionTypes.CLEAR_PROFILE });
     dispatch({ type: actionTypes.LOG_OUT });
     history.push(routes.HOME);
 };

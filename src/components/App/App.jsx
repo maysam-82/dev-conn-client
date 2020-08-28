@@ -6,6 +6,11 @@ import Login from '../Login';
 import Register from '../Register';
 import Toast from '../Toast';
 import Loading from '../Loading';
+import Dashboard from '../Dashboard';
+import CreateProfile from '../Profile/CreateUpdateProfile';
+import Auth from '../Auth';
+import Experience from '../Profile/Experience/Experience';
+import Education from '../Profile/Education/Education';
 import { routes } from '../../routes';
 import { loadUser } from '../../redux/actions/auth';
 import { setAuthToken } from '../../services/api/fetchApi';
@@ -28,6 +33,33 @@ const App = () => {
                 <Switch>
                     <Route exact path={routes.REGISTER} component={Register} />
                     <Route exact path={routes.LOGIN} component={Login} />
+                    <Auth>
+                        <Route
+                            exact
+                            path={routes.DASHBOARD}
+                            component={Dashboard}
+                        />
+                        <Route
+                            exact
+                            path={routes.CREATE_PROFILE}
+                            component={CreateProfile}
+                        />
+                        <Route
+                            exact
+                            path={routes.EDIT_PROFILE}
+                            component={CreateProfile}
+                        />
+                        <Route
+                            exact
+                            path={routes.ADD_EXPERIENCE}
+                            component={Experience}
+                        />
+                        <Route
+                            exact
+                            path={routes.ADD_EDUCATION}
+                            component={Education}
+                        />
+                    </Auth>
                 </Switch>
             </section>
         </Fragment>

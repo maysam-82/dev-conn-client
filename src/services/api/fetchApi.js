@@ -4,8 +4,19 @@ export const postData = async (url, data, config) => {
     const response = await axios.post(url, data, config);
     return response.data;
 };
+
 export const getData = async (url, data, config) => {
     const response = await axios.get(url, data, config);
+    return response.data;
+};
+
+export const updateData = async (url, data, config) => {
+    const response = await axios.put(url, data, config);
+    return response.data;
+};
+
+export const deleteData = async (url) => {
+    const response = await axios.delete(url);
     return response.data;
 };
 
