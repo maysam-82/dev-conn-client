@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
+import { deleteEducation } from '../../../redux/actions/profile';
+import { connect } from 'react-redux';
 
-const Educations = ({ educations }) => {
+const Educations = ({ educations, deleteEducation }) => {
     const renderEducations = educations.map(
         ({ _id, school, degree, from, to }) => (
             <tr key={_id}>
@@ -13,7 +15,10 @@ const Educations = ({ educations }) => {
                     {!to ? ' Now' : <Moment format="YYYY/MM/DD">{to}</Moment>}
                 </td>
                 <td>
-                    <button className="btn btn-danger">
+                    <button
+                        className="btn btn-danger"
+                        onClick={() => deleteEducation(_id)}
+                    >
                         <i className="fas fa-trash-alt"></i>
                     </button>
                 </td>
@@ -40,6 +45,7 @@ const Educations = ({ educations }) => {
 
 Educations.propTypes = {
     educations: PropTypes.array.isRequired,
+    deleteEducation: PropTypes.func.isRequired,
 };
 
-export default Educations;
+export default connect(null, { deleteEducation })(Educations);
