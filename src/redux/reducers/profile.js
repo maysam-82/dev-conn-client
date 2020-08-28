@@ -12,6 +12,7 @@ const profileReducer = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
         case actionTypes.GET_PROFILE_START:
+        case actionTypes.GET_PROFILES_START:
         case actionTypes.CREATE_PROFILE_START:
         case actionTypes.ADD_EXPERIENCE_START:
         case actionTypes.ADD_EDUCATION_START:
@@ -29,6 +30,7 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, profile: payload, loading: false };
 
         case actionTypes.GET_PROFILE_FAIL:
+        case actionTypes.GET_PROFILES_FAIL:
         case actionTypes.CREATE_PROFILE_FAIL:
         case actionTypes.ADD_EXPERIENCE_FAIL:
         case actionTypes.ADD_EDUCATION_FAIL:
@@ -47,6 +49,13 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isEditing: payload,
+            };
+
+        case actionTypes.GET_PROFILES_SUCCESS:
+            return {
+                ...state,
+                profiles: payload,
+                loading: false,
             };
 
         default:
