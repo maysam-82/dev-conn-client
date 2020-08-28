@@ -32,7 +32,7 @@ const Profiles = ({ getProfiles, profiles }) => {
 
 Profiles.propTypes = {
     getProfiles: PropTypes.func.isRequired,
-    profile: PropTypes.array.isRequired,
+    profile: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
