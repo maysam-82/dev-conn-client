@@ -97,7 +97,7 @@ const CreateUpdateProfile = ({
                 make your profile stand out
             </p>
             <small>* = required field</small>
-            <form className="form" onSubmit={(event) => handleSubmit(event)}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <select
                         name="status"

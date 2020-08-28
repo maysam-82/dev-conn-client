@@ -16,7 +16,7 @@ const DashboardActions = ({ setProfileStatus }) => {
             <div className="btn btn-light" onClick={() => handleClick()}>
                 <i className="fas fa-user-circle text-primary"></i> Edit Profile
             </div>
-            <Link to="add-experience" className="btn btn-light">
+            <Link to={routes.ADD_EXPERIENCE} className="btn btn-light">
                 <i className="fab fa-black-tie text-primary"></i> Add Experience
             </Link>
             <Link to="add-education" className="btn btn-light">

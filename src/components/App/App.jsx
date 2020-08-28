@@ -9,6 +9,7 @@ import Loading from '../Loading';
 import Dashboard from '../Dashboard';
 import CreateProfile from '../Profile/CreateUpdateProfile';
 import Auth from '../Auth';
+import Experience from '../Profile/Experience/Experience';
 import { routes } from '../../routes';
 import { loadUser } from '../../redux/actions/auth';
 import { setAuthToken } from '../../services/api/fetchApi';
@@ -46,6 +47,11 @@ const App = () => {
                             exact
                             path={routes.EDIT_PROFILE}
                             component={CreateProfile}
+                        />
+                        <Route
+                            exact
+                            path={routes.ADD_EXPERIENCE}
+                            component={Experience}
                         />
                     </Auth>
                 </Switch>

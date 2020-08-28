@@ -41,7 +41,7 @@ const Register = ({ setToast, setRegister, isAuthenticated }) => {
             <p className="lead">
                 <i className="fas fa-user"></i> Create Your Account
             </p>
-            <form className="form" onSubmit={(event) => handleSubmit(event)}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <input
                         type="text"
