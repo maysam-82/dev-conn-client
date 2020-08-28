@@ -2,13 +2,18 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCurrentProfile } from '../../redux/actions/profile';
+import { getCurrentProfile, deleteProfile } from '../../redux/actions/profile';
 import { routes } from '../../routes';
 import DashboardActions from './DashboardActions';
 import Experiences from './Experiences/Experiences';
 import Educations from './Educations/Educations';
 
-const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
+const Dashboard = ({
+    getCurrentProfile,
+    auth: { user },
+    profile,
+    deleteProfile,
+}) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
@@ -24,6 +29,15 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
                     <DashboardActions />
                     <Experiences experiences={profile.experience} />
                     <Educations educations={profile.education} />
+                    <div className="my-2">
+                        <button
+                            className="btn btn-danger"
+                            onClick={() => deleteProfile()}
+                        >
+                            <i className="fas fas-user-minus"></i> Delete
+                            Account
+                        </button>
+                    </div>
                 </Fragment>
             ) : (
                 <Fragment>
@@ -44,6 +58,7 @@ Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object,
+    deleteProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -51,4 +66,6 @@ const mapStateToProps = (state) => ({
     profile: state.profile.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteProfile })(
+    Dashboard
+);
