@@ -8,4 +8,5 @@ export const routes = {
     ADD_EXPERIENCE: '/add-experience',
     ADD_EDUCATION: '/add-education',
     PROFILES: '/profiles',
+    PROFILE: '/profile',
 };

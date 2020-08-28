@@ -6,6 +6,7 @@ const initialState = {
     repos: [],
     loading: false,
     isEditing: false,
+    selectedProfileId: '',
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -58,6 +59,11 @@ const profileReducer = (state = initialState, action) => {
                 loading: false,
             };
 
+        case actionTypes.SELECT_PROFILE:
+            return {
+                ...state,
+                selectedProfileId: payload,
+            };
         default:
             return state;
     }

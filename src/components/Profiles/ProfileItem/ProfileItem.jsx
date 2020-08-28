@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectProfile } from '../../../redux/actions/profile';
 
 const ProfileItem = ({
     profile: {
@@ -10,6 +11,7 @@ const ProfileItem = ({
         location,
         skills,
     },
+    selectProfile,
 }) => {
     const renderSkills =
         skills.length > 0
@@ -27,9 +29,12 @@ const ProfileItem = ({
                 <p className="my-1">{status}</p>
                 {company ? <p className="my-1">{company}</p> : null}
                 {location ? <p className="my-1">{location}</p> : null}
-                <Link to={`/profile/${_id}`} className="btn btn-primary">
+                <button
+                    onClick={() => selectProfile(_id)}
+                    className="btn btn-primary"
+                >
                     View Profile
-                </Link>
+                </button>
             </div>
             <ul>{renderSkills}</ul>
         </div>
@@ -38,6 +43,7 @@ const ProfileItem = ({
 
 ProfileItem.propTypes = {
     profile: PropTypes.object.isRequired,
+    selectProfile: PropTypes.func.isRequired,
 };
 
-export default ProfileItem;
+export default connect(null, { selectProfile })(ProfileItem);

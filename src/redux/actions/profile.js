@@ -338,3 +338,8 @@ export const deleteProfile = () => async (dispatch) => {
         }
     }
 };
+
+export const selectProfile = (profileId) => (dispatch) => {
+    dispatch({ type: actionTypes.SELECT_PROFILE, payload: profileId });
+    history.push(routes.PROFILE);
+};
