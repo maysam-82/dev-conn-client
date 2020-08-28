@@ -6,6 +6,8 @@ import { getProfile } from '../redux/actions/profile';
 import { routes } from '../routes';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout/ProfileAbout';
+import ProfileExperience from './ProfileExperience/ProfileExperience';
+import ProfileEducation from './ProfileEducation/ProfileEducation';
 
 const Profile = ({ userId, getProfile, profile, auth }) => {
     useEffect(() => {
@@ -27,6 +29,8 @@ const Profile = ({ userId, getProfile, profile, auth }) => {
             <div class="profile-grid my-1">
                 <ProfileTop profile={profile} />
                 <ProfileAbout profile={profile} />
+                <ProfileExperience experiences={profile.experience} />
+                <ProfileEducation educations={profile.education} />
             </div>
         </Fragment>
     );
