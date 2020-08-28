@@ -9,4 +9,6 @@ export const successMessage = {
     WELCOME: 'Welcome.',
     PROFILE_UPDATED: 'Profile updated.',
     PROFILE_CREATED: 'Profile created.',
+    EXPERIENCE_ADDED: 'Experience added.',
+    EDUCATION_ADDED: 'Education added.',
 };

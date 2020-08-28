@@ -1,5 +1,5 @@
 import actionTypes from '../actions/actionTypes';
-import { getData, postData } from '../../services/api/fetchApi';
+import { getData, postData, updateData } from '../../services/api/fetchApi';
 import { setLoading, removeLoading } from './loading';
 import { setToast } from './toast';
 import { errorMessage, successMessage } from '../../fixtures/messages';
@@ -62,7 +62,6 @@ export const createProfile = (profileData, edit = false) => async (
     } catch (error) {
         dispatch(removeLoading());
         const errors = error.response.data.errors;
-        console.log(error.response.data);
         if (error.response.status === 500) {
             dispatch(
                 setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
@@ -85,3 +84,91 @@ export const setProfileStatus = (isEditing) => ({
     type: actionTypes.SET_PROFILE_STATUS,
     payload: isEditing,
 });
+
+// Add experience
+export const addExperience = (experienceData) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({
+        type: actionTypes.ADD_EXPERIENCE_START,
+    });
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const data = await updateData(
+            '/api/profile/experience',
+            experienceData,
+            config
+        );
+        dispatch({
+            type: actionTypes.ADD_EXPERIENCE_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.EXPERIENCE_ADDED, 'success'));
+        history.push(routes.DASHBOARD);
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.ADD_EXPERIENCE_FAIL,
+        });
+    }
+};
+
+// Add Education
+export const addEducation = (educationData) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({
+        type: actionTypes.ADD_EDUCATION_START,
+    });
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const data = await updateData(
+            '/api/profile/education',
+            educationData,
+            config
+        );
+        dispatch({
+            type: actionTypes.ADD_EDUCATION_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.EDUCATION_ADDED, 'success'));
+        history.push(routes.DASHBOARD);
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.ADD_EDUCATION_FAIL,
+        });
+    }
+};
