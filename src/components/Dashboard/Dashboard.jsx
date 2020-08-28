@@ -6,6 +6,7 @@ import { getCurrentProfile } from '../../redux/actions/profile';
 import { routes } from '../../routes';
 import DashboardActions from './DashboardActions';
 import Experiences from './Experiences/Experiences';
+import Educations from './Educations/Educations';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
     useEffect(() => {
@@ -22,6 +23,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
                 <Fragment>
                     <DashboardActions />
                     <Experiences experiences={profile.experience} />
+                    <Educations educations={profile.education} />
                 </Fragment>
             ) : (
                 <Fragment>
