@@ -45,7 +45,7 @@ const profileReducer = (state = initialState, action) => {
         case actionTypes.DELETE_ACCOUNT_FAIL:
         case actionTypes.DELETE_EXPERIENCE_FAIL:
         case actionTypes.DELETE_EDUCATION_FAIL:
-            return { ...state, loading: false };
+            return { ...state, loading: false, profile: null };
 
         case actionTypes.CLEAR_PROFILE:
             return {

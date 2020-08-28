@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { getProfile } from '../redux/actions/profile';
 import { routes } from '../routes';
 import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout/ProfileAbout';
-import ProfileExperience from './ProfileExperience/ProfileExperience';
-import ProfileEducation from './ProfileEducation/ProfileEducation';
+import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
 
 const Profile = ({ userId, getProfile, profile, auth }) => {
     useEffect(() => {
