@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../redux/actions/profile';
 import { routes } from '../../routes';
-import DashboardActions from '../DashboardActions/DashboardActions';
+import DashboardActions from './DashboardActions';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile }) => {
     useEffect(() => {

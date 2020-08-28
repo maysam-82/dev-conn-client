@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { routes } from '../../routes';
-import { setProfileStatus } from '../../redux/actions/profile';
-import history from '../../history';
+import { routes } from '../../../routes';
+import { setProfileStatus } from '../../../redux/actions/profile';
+import history from '../../../history';
 
 const DashboardActions = ({ setProfileStatus }) => {
     const handleClick = () => {
