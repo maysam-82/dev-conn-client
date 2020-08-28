@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getProfile } from '../redux/actions/profile';
 import { routes } from '../routes';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout/ProfileAbout';
 
 const Profile = ({ userId, getProfile, profile, auth }) => {
     useEffect(() => {
@@ -12,14 +14,20 @@ const Profile = ({ userId, getProfile, profile, auth }) => {
 
     const renderProfileButtons = profile && (
         <Fragment>
-            <Link to={routes.PROFILES} className="btn btn-light">
-                Profiles
-            </Link>
-            {auth.isAuthenticated && auth.user._id === profile.user._id && (
-                <Link to={routes.EDIT_PROFILE} className="btn btn-dark">
-                    <i class="fas fa-edit"></i>
+            <div>
+                <Link to={routes.PROFILES} className="btn btn-light">
+                    Profiles
                 </Link>
-            )}
+                {auth.isAuthenticated && auth.user._id === profile.user._id && (
+                    <Link to={routes.EDIT_PROFILE} className="btn btn-dark">
+                        <i class="fas fa-edit"></i>
+                    </Link>
+                )}
+            </div>
+            <div class="profile-grid my-1">
+                <ProfileTop profile={profile} />
+                <ProfileAbout profile={profile} />
+            </div>
         </Fragment>
     );
 
