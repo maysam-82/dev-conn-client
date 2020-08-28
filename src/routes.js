@@ -7,4 +7,5 @@ export const routes = {
     CREATE_PROFILE: '/create-profile',
     EDIT_PROFILE: '/edit-profile',
     ADD_EXPERIENCE: '/add-experience',
+    ADD_EDUCATION: '/add-education',
 };
