@@ -15,6 +15,11 @@ export const updateData = async (url, data, config) => {
     return response.data;
 };
 
+export const deleteData = async (url) => {
+    const response = await axios.delete(url);
+    return response.data;
+};
+
 // Function which get a token. If there is a token, it will be added to headers
 // Otherwise it will deleted from headers
 export const setAuthToken = (token) => {

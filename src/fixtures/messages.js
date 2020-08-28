@@ -11,4 +11,7 @@ export const successMessage = {
     PROFILE_CREATED: 'Profile created.',
     EXPERIENCE_ADDED: 'Experience added.',
     EDUCATION_ADDED: 'Education added.',
+    EXPERIENCE_REMOVED: 'Experience removed.',
+    EDUCATION_REMOVED: 'Education removed.',
+    ACCOUNT_DELETED: 'Your account is deleted.',
 };

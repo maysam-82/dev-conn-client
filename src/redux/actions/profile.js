@@ -1,5 +1,10 @@
 import actionTypes from '../actions/actionTypes';
-import { getData, postData, updateData } from '../../services/api/fetchApi';
+import {
+    getData,
+    postData,
+    updateData,
+    deleteData,
+} from '../../services/api/fetchApi';
 import { setLoading, removeLoading } from './loading';
 import { setToast } from './toast';
 import { errorMessage, successMessage } from '../../fixtures/messages';
@@ -170,5 +175,109 @@ export const addEducation = (educationData) => async (dispatch) => {
         dispatch({
             type: actionTypes.ADD_EDUCATION_FAIL,
         });
+    }
+};
+
+// Delete Experience
+export const deleteExperience = (experienceId) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.DELETE_EXPERIENCE_START });
+    try {
+        const data = await deleteData(
+            `/api/profile/experience/:${experienceId}`
+        );
+
+        dispatch({
+            type: actionTypes.DELETE_EXPERIENCE_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.EXPERIENCE_REMOVED, 'success'));
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.DELETE_EXPERIENCE_FAIL,
+        });
+    }
+};
+
+// Delete education
+export const deleteEducation = (educationId) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.DELETE_EDUCATION_START });
+    try {
+        const data = await deleteData(`/api/profile/education/:${educationId}`);
+
+        dispatch({
+            type: actionTypes.DELETE_EDUCATION_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.EDUCATION_REMOVED, 'success'));
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.DELETE_EDUCATION_FAIL,
+        });
+    }
+};
+
+// Delete account & profile
+export const deleteProfile = () => async (dispatch) => {
+    if (window.confirm('Are you sure? This process can not be undone!')) {
+        dispatch(setLoading());
+        dispatch({ type: actionTypes.DELETE_ACCOUNT_START });
+        try {
+            await deleteData(`/api/profile/`);
+
+            dispatch({ type: actionTypes.CLEAR_PROFILE });
+            dispatch({
+                type: actionTypes.LOG_OUT,
+            });
+            history.push(routes.REGISTER);
+            dispatch(setToast(successMessage.ACCOUNT_DELETED, 'warning'));
+            dispatch(removeLoading());
+        } catch (error) {
+            dispatch(removeLoading());
+            const errors = error.response.data.errors;
+            if (error.response.status === 500) {
+                dispatch(
+                    setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+                );
+                return;
+            }
+            if (errors.length > 0) {
+                for (const error of errors) {
+                    dispatch(setToast(error.msg, 'danger'));
+                }
+            }
+            dispatch({
+                type: actionTypes.DELETE_ACCOUNT_FAIL,
+            });
+        }
     }
 };

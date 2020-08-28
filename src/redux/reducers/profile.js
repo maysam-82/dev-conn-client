@@ -15,18 +15,26 @@ const profileReducer = (state = initialState, action) => {
         case actionTypes.CREATE_PROFILE_START:
         case actionTypes.ADD_EXPERIENCE_START:
         case actionTypes.ADD_EDUCATION_START:
+        case actionTypes.DELETE_EXPERIENCE_START:
+        case actionTypes.DELETE_EDUCATION_START:
+        case actionTypes.DELETE_ACCOUNT_START:
             return { ...state, loading: true };
 
         case actionTypes.GET_PROFILE_SUCCESS:
         case actionTypes.CREATE_PROFILE_SUCCESS:
         case actionTypes.ADD_EXPERIENCE_SUCCESS:
         case actionTypes.ADD_EDUCATION_SUCCESS:
+        case actionTypes.DELETE_EDUCATION_SUCCESS:
+        case actionTypes.DELETE_EXPERIENCE_SUCCESS:
             return { ...state, profile: payload, loading: false };
 
         case actionTypes.GET_PROFILE_FAIL:
         case actionTypes.CREATE_PROFILE_FAIL:
         case actionTypes.ADD_EXPERIENCE_FAIL:
         case actionTypes.ADD_EDUCATION_FAIL:
+        case actionTypes.DELETE_ACCOUNT_FAIL:
+        case actionTypes.DELETE_EXPERIENCE_FAIL:
+        case actionTypes.DELETE_EDUCATION_FAIL:
             return { ...state, loading: false };
 
         case actionTypes.CLEAR_PROFILE:
