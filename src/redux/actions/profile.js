@@ -69,7 +69,7 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 // Get profile by id
-export const getProfiles = (userId) => async (dispatch) => {
+export const getProfile = (userId) => async (dispatch) => {
     dispatch(setLoading());
     dispatch({ type: actionTypes.GET_PROFILE_START });
     try {
