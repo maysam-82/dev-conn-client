@@ -15,6 +15,9 @@ const Navbar = ({ isAuthenticated, setLogout }) => {
                 </Link>
             </li>
             <li>
+                <Link to={routes.PROFILES}>Developers</Link>
+            </li>
+            <li>
                 <a href="#!" onClick={() => setLogout()}>
                     <i className="fas fa-sign-out-alt" />{' '}
                     <span className="hide-sm">Logout</span>
@@ -26,7 +29,7 @@ const Navbar = ({ isAuthenticated, setLogout }) => {
     const guestLinks = (
         <ul>
             <li>
-                <Link to={routes.PROFILE}>Developers</Link>
+                <Link to={routes.PROFILES}>Developers</Link>
             </li>
             <li>
                 <Link to={routes.REGISTER}>Register</Link>
