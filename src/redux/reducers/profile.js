@@ -23,12 +23,19 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, loading: true };
 
         case actionTypes.GET_PROFILE_SUCCESS:
-        case actionTypes.CREATE_PROFILE_SUCCESS:
         case actionTypes.ADD_EXPERIENCE_SUCCESS:
         case actionTypes.ADD_EDUCATION_SUCCESS:
         case actionTypes.DELETE_EDUCATION_SUCCESS:
         case actionTypes.DELETE_EXPERIENCE_SUCCESS:
             return { ...state, profile: payload, loading: false };
+
+        case actionTypes.CREATE_PROFILE_SUCCESS:
+            return {
+                ...state,
+                profile: payload,
+                loading: false,
+                isEditing: false,
+            };
 
         case actionTypes.GET_PROFILE_FAIL:
         case actionTypes.GET_PROFILES_FAIL:
@@ -63,6 +70,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedProfileUserId: payload,
+                isEditing: true,
             };
         default:
             return state;
