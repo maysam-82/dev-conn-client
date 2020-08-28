@@ -39,6 +39,64 @@ export const getCurrentProfile = () => async (dispatch) => {
     }
 };
 
+// Get all profiles
+export const getProfiles = () => async (dispatch) => {
+    dispatch({ type: actionTypes.CLEAR_PROFILE });
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.GET_PROFILES_START });
+    try {
+        const data = await getData('/api/profile');
+        dispatch({ type: actionTypes.GET_PROFILES_SUCCESS, payload: data });
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.GET_PROFILES_FAIL,
+        });
+    }
+};
+
+// Get profile by id
+export const getProfile = (userId) => async (dispatch) => {
+    if (!userId) return history.push(routes.PROFILES);
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.GET_PROFILE_START });
+    try {
+        const data = await getData(`/api/profile/user/${userId}`);
+        dispatch({ type: actionTypes.GET_PROFILE_SUCCESS, payload: data });
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.GET_PROFILE_FAIL,
+        });
+    }
+};
+
 // Create/Update profile
 export const createProfile = (profileData, edit = false) => async (
     dispatch
@@ -280,4 +338,9 @@ export const deleteProfile = () => async (dispatch) => {
             });
         }
     }
+};
+
+export const selectProfile = (profileId) => (dispatch) => {
+    dispatch({ type: actionTypes.SELECT_PROFILE, payload: profileId });
+    history.push(routes.PROFILE);
 };
