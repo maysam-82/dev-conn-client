@@ -8,6 +8,8 @@ import {
 } from '../../services/api/fetchApi';
 import { setLoading, removeLoading } from './loading';
 import { errorMessage, successMessage } from '../../fixtures/messages';
+import history from '../../history';
+import { routes } from '../../routes';
 
 // Get posts
 export const getPosts = () => async (dispatch) => {
@@ -160,4 +162,38 @@ export const addPost = (postFormData) => async (dispatch) => {
             type: actionTypes.ADD_POST_FAIL,
         });
     }
+};
+
+// Get post
+export const getPost = (postId) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.GET_POST_START });
+    try {
+        const data = await getData(`/api/posts/${postId}`);
+        dispatch({ type: actionTypes.GET_POST_SUCCESS, payload: data });
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.GET_POST_FAIL,
+        });
+    }
+};
+
+// select post
+export const selectPost = (postId) => (dispatch) => {
+    dispatch({ type: actionTypes.SELECT_POST, payload: postId });
+    history.push(routes.POST);
 };

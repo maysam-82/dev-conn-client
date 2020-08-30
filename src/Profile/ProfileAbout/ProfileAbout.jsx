@@ -9,22 +9,22 @@ const ProfileAbout = ({
     },
 }) => {
     const renderSkills = skills.map((skill, index) => (
-        <div class="p-1" key={index}>
-            <i class="fa fa-check"></i> {skill}
+        <div className="p-1" key={index}>
+            <i className="fa fa-check"></i> {skill}
         </div>
     ));
     return (
-        <div class="profile-about bg-light p-2">
+        <div className="profile-about bg-light p-2">
             {bio && (
                 <Fragment>
-                    <h2 class="text-primary">{name}s Bio</h2>
+                    <h2 className="text-primary">{name}s Bio</h2>
                     <p>{bio}</p>
                 </Fragment>
             )}
 
-            <div class="line"></div>
-            <h2 class="text-primary">Skill Set</h2>
-            <div class="skills">{renderSkills}</div>
+            <div className="line"></div>
+            <h2 className="text-primary">Skill Set</h2>
+            <div className="skills">{renderSkills}</div>
         </div>
     );
 };

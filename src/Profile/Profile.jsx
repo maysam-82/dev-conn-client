@@ -22,11 +22,11 @@ const Profile = ({ userId, getProfile, profile, auth }) => {
                 </Link>
                 {auth.isAuthenticated && auth.user._id === profile.user._id && (
                     <Link to={routes.EDIT_PROFILE} className="btn btn-dark">
-                        <i class="fas fa-edit"></i>
+                        <i className="fas fa-edit"></i>
                     </Link>
                 )}
             </div>
-            <div class="profile-grid my-1">
+            <div className="profile-grid my-1">
                 <ProfileTop profile={profile} />
                 <ProfileAbout profile={profile} />
                 <ProfileExperience experiences={profile.experience} />
