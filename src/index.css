@@ -21,6 +21,12 @@ body {
     color: #333;
 }
 
+.select-profile {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 a {
     color: var(--primary-color);
     text-decoration: none;

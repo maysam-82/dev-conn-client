@@ -9,4 +9,6 @@ export const routes = {
     ADD_EDUCATION: '/add-education',
     PROFILES: '/profiles',
     PROFILE: '/profile',
+    POSTS: '/posts',
+    POST: '/post',
 };
