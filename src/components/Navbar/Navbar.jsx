@@ -15,6 +15,9 @@ const Navbar = ({ isAuthenticated, setLogout }) => {
                 </Link>
             </li>
             <li>
+                <Link to={routes.POSTS}>Posts</Link>
+            </li>
+            <li>
                 <Link to={routes.PROFILES}>Developers</Link>
             </li>
             <li>

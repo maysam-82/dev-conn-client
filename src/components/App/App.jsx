@@ -13,6 +13,7 @@ import Experience from '../Dashboard/Experience';
 import Education from '../Dashboard/Education';
 import Profiles from '../Profiles';
 import Profile from '../../Profile';
+import Posts from '../Posts/Posts';
 import { routes } from '../../routes';
 import { loadUser } from '../../redux/actions/auth';
 import { setAuthToken } from '../../services/api/fetchApi';
@@ -38,6 +39,7 @@ const App = () => {
                     <Route exact path={routes.PROFILES} component={Profiles} />
                     <Route exact path={routes.PROFILE} component={Profile} />
                     <Auth>
+                        <Route exact path={routes.POSTS} component={Posts} />
                         <Route
                             exact
                             path={routes.DASHBOARD}
