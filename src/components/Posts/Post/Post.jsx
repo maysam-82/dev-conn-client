@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
 import { routes } from '../../../routes';
 import history from '../../../history';
 import { addLike, removeLike, deletePost } from '../../../redux/actions/posts';
+import { selectProfile } from '../../../redux/actions/profile';
 
 const Post = ({
     post: { _id: postId, text, name, avatar, user, likes, comments, date },
@@ -13,14 +13,18 @@ const Post = ({
     addLike,
     removeLike,
     deletePost,
+    selectProfile,
 }) => {
     return (
         <div className="post bg-white p-1 my-1">
             <div>
-                <Link to={routes.PROFILE}>
+                <div
+                    className="select-profile"
+                    onClick={() => selectProfile(user)}
+                >
                     <img className="round-img" src={avatar} alt={name} />
                     <h4>{name}</h4>
-                </Link>
+                </div>
             </div>
             <div>
                 <p className="my-1">{text}</p>
@@ -71,12 +75,16 @@ Post.propTypes = {
     addLike: PropTypes.func.isRequired,
     removeLike: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
+    selectProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLike, removeLike, deletePost })(
-    Post
-);
+export default connect(mapStateToProps, {
+    addLike,
+    removeLike,
+    deletePost,
+    selectProfile,
+})(Post);

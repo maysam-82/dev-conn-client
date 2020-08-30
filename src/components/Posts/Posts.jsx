@@ -2,7 +2,8 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPosts } from '../../redux/actions/posts';
-import Post from './Post/Post';
+import Post from './Post';
+import PostForm from './PostForm';
 
 const Posts = ({ getPosts, posts }) => {
     useEffect(() => {
@@ -19,7 +20,7 @@ const Posts = ({ getPosts, posts }) => {
             <p className="lead">
                 <i className="fas fa-user"></i> Welcome to the community
             </p>
-            {/* TODO: POST FORM */}
+            <PostForm />
             <div className="posts">{renderPosts}</div>
         </Fragment>
     );

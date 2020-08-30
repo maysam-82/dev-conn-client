@@ -1,6 +1,11 @@
 import actionTypes from './actionTypes';
 import { setToast } from './toast';
-import { getData, updateData, deleteData } from '../../services/api/fetchApi';
+import {
+    getData,
+    updateData,
+    deleteData,
+    postData,
+} from '../../services/api/fetchApi';
 import { setLoading, removeLoading } from './loading';
 import { errorMessage, successMessage } from '../../fixtures/messages';
 
@@ -90,6 +95,7 @@ export const removeLike = (postId) => async (dispatch) => {
 
 // delete post
 export const deletePost = (postId) => async (dispatch) => {
+    dispatch(setLoading());
     dispatch({ type: actionTypes.DELETE_POST_START });
     try {
         await deleteData(`/api/posts/${postId}`);
@@ -98,7 +104,9 @@ export const deletePost = (postId) => async (dispatch) => {
             payload: postId,
         });
         dispatch(setToast(successMessage.POST_DELETED, 'success'));
+        dispatch(removeLoading());
     } catch (error) {
+        dispatch(removeLoading());
         const errors = error.response.data.errors;
         if (error.response.status === 500) {
             dispatch(
@@ -113,6 +121,43 @@ export const deletePost = (postId) => async (dispatch) => {
         }
         dispatch({
             type: actionTypes.DELETE_POST_FAIL,
+        });
+    }
+};
+
+// add post
+export const addPost = (postFormData) => async (dispatch) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.ADD_POST_START });
+    try {
+        const data = await postData(`/api/posts`, postFormData, config);
+        dispatch({
+            type: actionTypes.ADD_POST_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.POST_CREATED, 'success'));
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.ADD_POST_FAIL,
         });
     }
 };
