@@ -14,4 +14,5 @@ export const successMessage = {
     EXPERIENCE_REMOVED: 'Experience removed.',
     EDUCATION_REMOVED: 'Education removed.',
     ACCOUNT_DELETED: 'Your account is deleted.',
+    POST_DELETED: 'Post is deleted.',
 };
