@@ -16,25 +16,36 @@ const postsReducer = (state = initialState, action) => {
         case actionTypes.UPDATE_LIKES_START:
         case actionTypes.DELETE_POST_START:
         case actionTypes.ADD_POST_START:
+        case actionTypes.ADD_COMMENT_START:
+        case actionTypes.REMOVE_COMMENT_START:
             return { ...state, loading: true };
+
         case actionTypes.GET_POSTS_FAIL:
             return { ...state, ...initialState };
+
         case actionTypes.GET_POST_FAIL:
             return { ...state, post: null };
+
         case actionTypes.UPDATE_LIKES_FAIL:
         case actionTypes.DELETE_POST_FAIL:
         case actionTypes.ADD_POST_FAIL:
+        case actionTypes.ADD_COMMENT_FAIL:
+        case actionTypes.REMOVE_COMMENT_FAIL:
             return { ...state, loading: false };
+
         case actionTypes.GET_POSTS_SUCCESS:
             return { ...state, posts: payload, loading: false };
+
         case actionTypes.GET_POST_SUCCESS:
             return { ...state, post: payload, loading: false };
+
         case actionTypes.ADD_POST_SUCCESS:
             return {
                 ...state,
                 posts: [payload, ...state.posts],
                 loading: false,
             };
+
         case actionTypes.DELETE_POST_SUCCESS:
             return {
                 ...state,
@@ -56,6 +67,26 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedPostId: payload,
+            };
+        case actionTypes.ADD_COMMENT_SUCCESS:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: payload,
+                },
+                loading: false,
+            };
+        case actionTypes.REMOVE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: state.post.comments.filter(
+                        (comment) => comment._id !== payload
+                    ),
+                },
+                loading: false,
             };
         default:
             return state;

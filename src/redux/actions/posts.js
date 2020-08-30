@@ -166,6 +166,10 @@ export const addPost = (postFormData) => async (dispatch) => {
 
 // Get post
 export const getPost = (postId) => async (dispatch) => {
+    if (!postId) {
+        history.push(routes.DASHBOARD);
+        return;
+    }
     dispatch(setLoading());
     dispatch({ type: actionTypes.GET_POST_START });
     try {
@@ -196,4 +200,77 @@ export const getPost = (postId) => async (dispatch) => {
 export const selectPost = (postId) => (dispatch) => {
     dispatch({ type: actionTypes.SELECT_POST, payload: postId });
     history.push(routes.POST);
+};
+
+// add comment
+export const addComment = (commentData, postId) => async (dispatch) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.ADD_COMMENT_START });
+    try {
+        const data = await postData(
+            `/api/posts/comment/${postId}`,
+            commentData,
+            config
+        );
+        dispatch({
+            type: actionTypes.ADD_COMMENT_SUCCESS,
+            payload: data,
+        });
+        dispatch(setToast(successMessage.COMMENT_ADDED, 'success'));
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.ADD_COMMENT_FAIL,
+        });
+    }
+};
+
+// Delete comment
+export const deleteComment = (commentId, postId) => async (dispatch) => {
+    dispatch(setLoading());
+    dispatch({ type: actionTypes.REMOVE_COMMENT_START });
+    try {
+        await deleteData(`/api/posts/comment/${postId}/${commentId}`);
+        dispatch({
+            type: actionTypes.REMOVE_COMMENT_SUCCESS,
+            payload: commentId,
+        });
+        dispatch(setToast(successMessage.COMMENT_DELETED, 'success'));
+        dispatch(removeLoading());
+    } catch (error) {
+        dispatch(removeLoading());
+        const errors = error.response.data.errors;
+        if (error.response.status === 500) {
+            dispatch(
+                setToast(errorMessage.COULD_NOT_CONNECT_TO_SERVER, 'danger')
+            );
+            return;
+        }
+        if (errors.length > 0) {
+            for (const error of errors) {
+                dispatch(setToast(error.msg, 'danger'));
+            }
+        }
+        dispatch({
+            type: actionTypes.REMOVE_COMMENT_FAIL,
+        });
+    }
 };
