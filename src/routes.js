@@ -10,4 +10,5 @@ export const routes = {
     PROFILES: '/profiles',
     PROFILE: '/profile',
     POSTS: '/posts',
+    POST: '/post',
 };
